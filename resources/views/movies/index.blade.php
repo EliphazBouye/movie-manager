@@ -3,7 +3,13 @@
 @section('content')
 <div class="mt-5">
 <!-- component -->
+
 <div class="md:px-32 py-8 w-full">
+    @if(session('success'))
+      <div class="bg-green-500 text-gray-100 py-6 px-6 rounded mb-4">
+        {{ session('success') }}
+      </div>
+    @endif
     <div class="shadow overflow-hidden rounded border-b border-gray-200">
       <table class="min-w-full bg-white">
         <thead class="bg-gray-800 text-white">
