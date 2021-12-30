@@ -14,7 +14,8 @@ class FilmController extends Controller
      */
     public function index()
     {
-        $films = Film::paginate(5);
+        $films = Film::orderBy('created_at', 'desc')->paginate(5);
+        
 
         return view('movies.index', compact('films'));
     }
@@ -26,7 +27,7 @@ class FilmController extends Controller
      */
     public function create()
     {
-        //
+        return view('movies.create');
     }
 
     /**
@@ -37,7 +38,19 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|unique:films|max:255',
+            'year' => 'required|numeric',
+            'description' => 'required',
+        ]);
+
+        $film = Film::create([
+            'title' => $validated['title'],
+            'year' => $validated['year'],
+            'description' => $validated['description'],
+        ]);
+
+        return redirect()->route('films.index')->with('success', 'Film created successfully.');
     }
 
     /**
@@ -73,7 +86,19 @@ class FilmController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'year' => 'required|numeric',
+            'description' => 'required',
+        ]);
+
+        Film::find($id)->update([
+            'title' => $validated['title'],
+            'year' => $validated['year'],
+            'description' => $validated['description'],
+        ]);
+
+        return redirect()->back()->with('success', 'Film updated successfully.');
     }
 
     /**
@@ -86,6 +111,6 @@ class FilmController extends Controller
     {
         Film::destroy($id);
 
-        return redirect()->route('films.index')->with('success', 'Movie deleted successfully');
+        return redirect()->back()->with('success', 'Movie deleted successfully');
     }
 }

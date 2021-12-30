@@ -24,7 +24,7 @@ class Film extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string', 'max:100'],
+            'title' => ['required', 'string', 'max:255'],
             'year' => ['required', 'numeric', 'min:1950', 'max:' . date('Y')],
             'description' => ['required', 'string', 'max:500'],
         ];
