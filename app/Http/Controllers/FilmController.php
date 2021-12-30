@@ -16,7 +16,7 @@ class FilmController extends Controller
     {
         $films = Film::paginate(5);
 
-        return view('index', compact('films'));
+        return view('movies.index', compact('films'));
     }
 
     /**
@@ -48,7 +48,7 @@ class FilmController extends Controller
      */
     public function show(Film $film)
     {
-        return view('show', compact('film'));
+        return view('movies.show', compact('film'));
     }
 
     /**
@@ -59,7 +59,9 @@ class FilmController extends Controller
      */
     public function edit($id)
     {
-        //
+        $film = Film::find($id);
+        
+        return view('movies.edit', compact('film'));
     }
 
     /**

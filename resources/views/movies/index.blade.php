@@ -23,7 +23,7 @@
             <td class="w-1/3 text-left py-3 px-4">{{ $film->year }}</td>
             <td class="w-1/3 text-left py-3 px-4">{{ $film->description }}</td>
             <td class="text-left py-3 px-4"><a class="bg-green-400 hover:bg-green-300 px-3 py-2 rounded text-white" href="{{ route('films.show', $film->id) }}">Read</a></td>
-            <td class="text-left py-3 px-4"><a class="bg-blue-400 hover:bg-blue-300 px-3 py-2 rounded text-white" href="{{ route('films.update', $film->id) }}">Update</a></td>
+            <td class="text-left py-3 px-4"><a class="bg-blue-400 hover:bg-blue-300 px-3 py-2 rounded text-white" href="{{ route('films.edit', $film->id) }}">Update</a></td>
             <td class="text-left py-3 px-4">
                 <form action="{{ route('films.destroy', $film->id) }}" method="POST">
                     @csrf

@@ -17,7 +17,6 @@ class FilmFactory extends Factory
             'title' => $this->faker->sentence(2, true),
             'year' => $this->faker->year(),
             'description' => $this->faker->paragraph(),
-
         ];
     }
 }
