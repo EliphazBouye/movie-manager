@@ -10,6 +10,24 @@
         {{ session('success') }}
       </div>
     @endif
+
+    <div>
+      <div class="p-5">
+
+        {{-- filter movie by category --}}
+      <select onchange="window.location.href = this.value">
+          <option value="{{ route('films.index') }}" @unless($slug) selected @endunless></option>
+          @foreach ($categories as $category)
+            <option value="{{ route('films.category', $category->slug) }}" {{ $slug == $category->slug ? 'selected' : '' }}>
+            {{ $category->name }}</option>
+          @endforeach
+      </select>
+
+      {{-- link to add new movie --}}
+        <a class="text-gray-100 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded" href="{{ route('films.create') }}">Add film</a>
+      </div>
+
+    </div>
     <div class="shadow overflow-hidden rounded border-b border-gray-200">
       <table class="min-w-full bg-white">
         <thead class="bg-gray-800 text-white">

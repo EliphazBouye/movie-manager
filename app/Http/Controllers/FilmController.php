@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Film;
+use App\Models\{Category ,Film};
 use Illuminate\Http\Request;
 
 class FilmController extends Controller
@@ -12,12 +12,15 @@ class FilmController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($slug = null)
     {
-        $films = Film::orderBy('created_at', 'desc')->paginate(5);
-        
+        $query = $slug ? Category::whereSlug($slug)->firstOrFail()->films() : Film::query();
 
-        return view('movies.index', compact('films'));
+        $films = $query->orderBy('created_at', 'desc')->paginate(5);
+
+        $categories = Category::all();
+
+        return view('movies.index', compact('films', 'categories', 'slug'));
     }
 
     /**
