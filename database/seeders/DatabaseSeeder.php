@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\Film;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,7 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Film::factory(10)->create();
-        
+        Category::factory()
+        ->has(Film::factory()->count(3))
+        ->count('15')
+        ->create();
     }
 }
