@@ -18,3 +18,5 @@ Run migration :
 For get all seed in database : 
 
     php artisan db:seed
+
+By Eliphaz
